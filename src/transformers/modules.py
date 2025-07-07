@@ -1,9 +1,11 @@
 """
 Implementation of all the sub-modules required to build transformer blocks
 """
-import torch
 import math
+
+import torch
 from torch import nn
+
 
 def scaled_dot_product_attention(q, k, d_k, mask):
     scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(d_k)

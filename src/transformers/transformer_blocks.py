@@ -3,8 +3,11 @@ Implementations of different versions of transformer layers/blocks
 Aryaman Pandya
 """
 
-from modules import MultiHeadAttention, PositionWiseFFN, positional_embedding
 from torch import nn
+
+from transformers.modules import (MultiHeadAttention, PositionWiseFFN,
+                                  positional_embedding)
+
 
 class TransformerLayer(nn.Module):
     """
