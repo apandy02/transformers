@@ -31,7 +31,7 @@ class Transformer(nn.Module):
         self.embedding = nn.Embedding(vocab_size, d_model, padding_idx=0)
         self.positional_embedding = positional_embedding
         self.dropout = nn.Dropout(dropout)
-        self.layers = [TransformerLayer(d_k, d_model, d_v, num_heads, d_ff, mask, dropout) for _ in range(num_layers)]
+        self.layers = nn.ModuleList([TransformerLayer(d_k, d_model, d_v, num_heads, d_ff, mask, dropout) for _ in range(num_layers)])
 
     def forward(self, x):
         embedded = self.embedding(x)
@@ -66,7 +66,7 @@ class Decoder(nn.Module):
         self.embedding = nn.Embedding(vocab_size, d_model, padding_idx=0)
         self.positional_embedding = positional_embedding
         self.dropout = nn.Dropout(dropout)
-        self.layers = [DecoderLayer(d_k, d_model, d_v, num_heads, d_ff, dropout) for _ in range(num_layers)]
+        self.layers = nn.ModuleList([DecoderLayer(d_k, d_model, d_v, num_heads, d_ff, dropout) for _ in range(num_layers)])
         self.lm_head = nn.Linear(d_model, out_dims)
 
     def forward(self, x, encoder_output):
