@@ -19,8 +19,8 @@ class TransformerLayer(nn.Module):
         self.pointwise_ffn = PositionWiseFFN(d_model, d_ff, dropout)
 
     def forward(self, x):
-        output = self.multihead_attention(x)
-        return self.pointwise_ffn(output)
+        output = self.multihead_attention(x) + x
+        return self.pointwise_ffn(output) + output
 
 
 class Transformer(nn.Module):
